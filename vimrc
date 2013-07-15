@@ -19,11 +19,13 @@ set encoding=utf-8
 set expandtab      " expand tabs to spaces
 set ignorecase     " case-insensitive search
 set incsearch      " search as you type
+set hlsearch
 set laststatus=2   " always show statusline
 set list           " show trailing whitespace
 set listchars=tab:▸\ ,trail:▫
 set number         " show line numbers
 set ruler          " show where you are
+set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%)
 set scrolloff=3    " show context above/below cursorline
 set shiftwidth=2   " normal mode indentation commands use 2 spaces
 set showcmd
@@ -41,6 +43,10 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+imap OD <left>
+imap OA <up>
+imap OC <right>
+imap OB <down>
 map <leader>l :Align
 nmap <leader>a :Ack 
 nmap <leader>b :CommandTBuffer<CR>

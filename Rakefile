@@ -83,25 +83,23 @@ namespace :install do
     end
 
     bin_vim = File.expand_path('~/bin/vim')
-    unless File.executable?(bin_vim)
-      File.open(bin_vim, 'w', 0744) do |io|
-        io << <<-SHELL
+    File.open(bin_vim, 'w', 0744) do |io|
+      io << <<-SHELL
 #!/bin/bash
 exec /Applications/MacVim.app/Contents/MacOS/Vim "$@"
         SHELL
-      end
     end
   end
 end
 
 desc 'Install these config files.'
 task :default do
-  Rake::Task['install:ack'].invoke
-  Rake::Task['install:iterm'].invoke
+  #Rake::Task['install:ack'].invoke
+  #Rake::Task['install:iterm'].invoke
   Rake::Task['install:ctags'].invoke
   Rake::Task['install:reattach_to_user_namespace'].invoke
   Rake::Task['install:tmux'].invoke
-  Rake::Task['install:macvim'].invoke
+  #Rake::Task['install:macvim'].invoke
 
   step 'git submodules'
   sh 'git submodule update --init'
@@ -119,17 +117,24 @@ task :default do
   ln_sf File.expand_path('tmux.conf'),    File.expand_path('~/.tmux.conf'),    :verbose => true
   ln_sf File.expand_path('vim'),          File.expand_path('~/.vim'),          :verbose => true
   ln_sf File.expand_path('vimrc'),        File.expand_path('~/.vimrc'),        :verbose => true
+  ln_sf File.expand_path('vimrc.local'),  File.expand_path('~/.vimrc.local'),  :verbose => true
+  ln_sf File.expand_path('bashrc'),       File.expand_path('~/.bashrc'),       :verbose => true
+  ln_sf File.expand_path('zshrc'),        File.expand_path('~/.zshrc'),        :verbose => true
+  ln_sf File.expand_path('ackrc'),        File.expand_path('~/.ackrc'),        :verbose => true
+  ln_sf File.expand_path('bash_aliases'), File.expand_path('~/.bash_aliases'), :verbose => true
+  ln_sf File.expand_path('bash_profile'), File.expand_path('~/.bash_profile'), :verbose => true
+  ln_sf File.expand_path('gitconfig'),    File.expand_path('~/.gitconfig'),    :verbose => true
 
   unless File.exist?(File.expand_path('~/.vimrc.local'))
     cp File.expand_path('vimrc.local'), File.expand_path('~/.vimrc.local'), :verbose => true
   end
 
-  step 'iterm2 colorschemes'
-  colorschemes = `defaults read com.googlecode.iterm2 'Custom Color Presets'`
-  dark  = colorschemes !~ /Solarized Dark/
-  light = colorschemes !~ /Solarized Light/
-  sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')) if dark
-  sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')) if light
+  #step 'iterm2 colorschemes'
+  #colorschemes = `defaults read com.googlecode.iterm2 'Custom Color Presets'`
+  #dark  = colorschemes !~ /Solarized Dark/
+  #light = colorschemes !~ /Solarized Light/
+  #sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')) if dark
+  #sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')) if light
 
   step 'iterm2 profiles'
   puts

@@ -1,0 +1,14 @@
+[color]
+    ui = auto
+[core]
+    pager = less -R
+[user]
+	email = osong@mit.edu
+	name = oliversong
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%C(yellow)%h %ad%Creset | %s%C(bold red)%d%Creset [%C(bold blue)%an%Creset]\" --graph --date=short
+    rb = rebase
