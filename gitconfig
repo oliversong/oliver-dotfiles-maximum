@@ -3,8 +3,8 @@
 [core]
     pager = less -R
 [user]
-	email = osong@mit.edu
-	name = oliversong
+    email = osong@mit.edu
+    name = Oliver Song
 [alias]
     co = checkout
     ci = commit
