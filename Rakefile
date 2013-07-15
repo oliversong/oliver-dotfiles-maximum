@@ -94,12 +94,12 @@ end
 
 desc 'Install these config files.'
 task :default do
-  #Rake::Task['install:ack'].invoke
-  #Rake::Task['install:iterm'].invoke
+  Rake::Task['install:ack'].invoke
+  Rake::Task['install:iterm'].invoke
   Rake::Task['install:ctags'].invoke
   Rake::Task['install:reattach_to_user_namespace'].invoke
   Rake::Task['install:tmux'].invoke
-  #Rake::Task['install:macvim'].invoke
+  Rake::Task['install:macvim'].invoke
 
   step 'git submodules'
   sh 'git submodule update --init'
@@ -129,12 +129,12 @@ task :default do
     cp File.expand_path('vimrc.local'), File.expand_path('~/.vimrc.local'), :verbose => true
   end
 
-  #step 'iterm2 colorschemes'
-  #colorschemes = `defaults read com.googlecode.iterm2 'Custom Color Presets'`
-  #dark  = colorschemes !~ /Solarized Dark/
-  #light = colorschemes !~ /Solarized Light/
-  #sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')) if dark
-  #sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')) if light
+  step 'iterm2 colorschemes'
+  colorschemes = `defaults read com.googlecode.iterm2 'Custom Color Presets'`
+  dark  = colorschemes !~ /Solarized Dark/
+  light = colorschemes !~ /Solarized Light/
+  sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Dark.itermcolors')) if dark
+  sh('open', '-a', '/Applications/iTerm.app', File.expand_path('iterm2-colors-solarized/Solarized Light.itermcolors')) if light
 
   step 'iterm2 profiles'
   puts
