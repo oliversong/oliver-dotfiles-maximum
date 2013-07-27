@@ -31,3 +31,4 @@ alias gonsi='ssh root@036d406.netsolvps.com'
 
 alias showhidden="bash ~/showhidden.sh"
 alias hidehidden="bash ~/hidehidden.sh"
+alias gap="git add -p"
