@@ -8,7 +8,7 @@ ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="agnoster"
 
-source ~/.bashrc
+source ~/.bash_profile
 
 source ~/.oh-my-zsh/z.sh
 
