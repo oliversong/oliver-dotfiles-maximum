@@ -57,6 +57,7 @@ nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :ToggleGitGutter<CR>
+nmap <leader>hl :let @/ = ""<CR>
 
 " plugin settings
 let g:CommandTMaxHeight=20
