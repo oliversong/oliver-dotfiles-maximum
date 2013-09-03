@@ -1,7 +1,7 @@
 set nocursorline " don't highlight current line
 set background=dark
 set t_Co=256
-colorscheme slate
+colorscheme solarized
 set cursorline
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"

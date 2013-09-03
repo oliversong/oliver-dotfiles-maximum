@@ -2,6 +2,7 @@
     ui = auto
 [core]
     pager = less -R
+    editor = vim
 [user]
     email = osong@mit.edu
     name = Oliver Song
