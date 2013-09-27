@@ -71,6 +71,7 @@ let g:CommandTMaxHeight=20
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
 let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:airline_powerline_fonts = 1
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
