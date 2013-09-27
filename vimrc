@@ -59,6 +59,13 @@ nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :ToggleGitGutter<CR>
 nmap <leader>hl :let @/ = ""<CR>
 
+" markdown previews in Marked.app
+function! s:setupMarkup()
+  nnoremap <leader>md :silent !open -a Marked.app '%:p'<cr>
+endfunction
+
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+
 " plugin settings
 let g:CommandTMaxHeight=20
 let g:NERDSpaceDelims=1
