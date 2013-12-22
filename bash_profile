@@ -5,8 +5,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 # add virtualenv wrapper support
 export WORKON_HOME=~/Envs
 source /usr/local/bin/virtualenvwrapper.sh
