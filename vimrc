@@ -1,6 +1,8 @@
 " set up pathogen, https://github.com/tpope/vim-pathogen
 filetype off
 call pathogen#infect()
+filetype plugin indent off
+set runtimepath+=/usr/local/go/misc/vim
 filetype plugin indent on
 
 " don't bother with vi compatibility
