@@ -81,5 +81,5 @@ fi
 
 PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 GOROOT=/usr/local/go
-export GOPATH=$HOME/Development/golang # export makes the variable available to processes
+export GOPATH=$HOME/Development/6.824 # export makes the variable available to processes
 PATH=$PATH:$GOROOT/bin:$GOPATH/bin
