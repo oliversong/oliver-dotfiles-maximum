@@ -61,6 +61,14 @@ nmap <leader><space> :call whitespace#strip_trailing()<CR>
 nmap <leader>g :ToggleGitGutter<CR>
 nmap <leader>hl :let @/ = ""<CR>
 
+" configure camelcasemotion to overwrite w b e keys
+map w <Plug>CamelCaseMotion_w
+map b <Plug>CamelCaseMotion_b
+map e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
+
 " markdown previews in Marked.app
 function! s:setupMarkup()
   nnoremap <leader>md :silent !open -a Marked.app '%:p'<cr>
