@@ -1,12 +1,32 @@
 " set up pathogen, https://github.com/tpope/vim-pathogen
 filetype off
 call pathogen#infect()
-filetype plugin indent off
-set runtimepath+=/usr/local/go/misc/vim
-filetype plugin indent on
 
 " don't bother with vi compatibility
 set nocompatible
+
+" set up Vundle
+filetype off
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Plugin 'gmarik/vundle'
+Plugin 'Valloric/YouCompleteMe'
+
+filetype plugin indent on
+
+" Brief help
+" :PluginList          - list configured plugins
+" :PluginInstall(!)    - install (update) plugins
+" :PluginSearch(!) foo - search (or refresh cache first) for foo
+" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
+
+" macvim settings
+set guioptions-=r
+set guioptions-=L
+set guifont=Monaco\ for\ Powerline:h12
 
 " enable syntax highlighting
 syntax enable
@@ -38,6 +58,12 @@ set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc,packages/**
 set wildmenu       " show a navigable menu for tab completion
 set wildmode=longest,list,full
 set mouse=a
+
+"folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
 
 " keyboard shortcuts
 let mapleader = ','
@@ -82,6 +108,11 @@ let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 0
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:airline_powerline_fonts = 1
+let g:go_fmt_autosave = 0
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_add_preview_to_completeopt = 0
+set completeopt-=preview
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml

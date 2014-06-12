@@ -51,4 +51,6 @@ source $ZSH/oh-my-zsh.sh
 DEFAULT_USER="oliversong"
 
 # Customize to your needs...
-export PATH=~/bin:$PATH:/usr/local/bin:/Users/oliversong/.rvm/gems/ruby-1.9.2-p320/bin:/Users/oliversong/.rvm/gems/ruby-1.9.2-p320@global/bin:/Users/oliversong/.rvm/rubies/ruby-1.9.2-p320/bin:/Users/oliversong/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/texbin:/Users/oliversong/.ec2/bin:/Users/oliversong/.rvm/bin
+export PATH=~/bin:/usr/local/bin:$PATH:/usr/bin:/Users/oliversong/.rvm/gems/ruby-1.9.2-p320/bin:/Users/oliversong/.rvm/gems/ruby-1.9.2-p320@global/bin:/Users/oliversong/.rvm/rubies/ruby-1.9.2-p320/bin:/Users/oliversong/.rvm/bin:/bin:/usr/sbin:/sbin:/usr/texbin:/Users/oliversong/.ec2/bin:/Users/oliversong/.rvm/bin
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
