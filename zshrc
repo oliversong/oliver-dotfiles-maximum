@@ -54,3 +54,8 @@ DEFAULT_USER="oliversong"
 export PATH=~/bin:/usr/local/bin:$PATH:/usr/bin:/Users/oliversong/.rvm/gems/ruby-1.9.2-p320/bin:/Users/oliversong/.rvm/gems/ruby-1.9.2-p320@global/bin:/Users/oliversong/.rvm/rubies/ruby-1.9.2-p320/bin:/Users/oliversong/.rvm/bin:/bin:/usr/sbin:/sbin:/usr/texbin:/Users/oliversong/.ec2/bin:/Users/oliversong/.rvm/bin
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+GOROOT=/usr/local/go
+export GOPATH=$HOME/Development/6.824 # export makes the variable available to processes
+# export GOPATH=$HOME/Development/scryer
+PATH=$PATH:$GOROOT/bin:$GOPATH/bin

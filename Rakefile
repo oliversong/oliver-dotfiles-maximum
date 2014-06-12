@@ -74,9 +74,9 @@ namespace :install do
     step 'MacVim'
     unless app? 'MacVim'
       system <<-SHELL
-        curl -L -o macvim.tbz https://github.com/downloads/b4winckler/macvim/MacVim-snapshot-64.tbz && \
+        curl -L -o macvim.tbz https://github.com/b4winckler/macvim/releases/download/snapshot-73/MacVim-snapshot-73-Mavericks.tbz && \
           bunzip2 macvim.tbz && tar xf macvim.tar && \
-          mv MacVim-snapshot-64/MacVim.app /Applications && \
+          mv MacVim-snapshot-73/MacVim.app /Applications && \
           rm -rf macvim.tbz macvim.tar MacVim-snapshot-64
       SHELL
       system ''

@@ -79,8 +79,3 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-GOROOT=/usr/local/go
-export GOPATH=$HOME/Development/6.824 # export makes the variable available to processes
-# export GOPATH=$HOME/Development/scryer
-PATH=$PATH:$GOROOT/bin:$GOPATH/bin
