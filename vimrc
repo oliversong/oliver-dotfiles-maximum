@@ -58,6 +58,8 @@ set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc,packages/**
 set wildmenu       " show a navigable menu for tab completion
 set wildmode=longest,list,full
 set mouse=a
+set relativenumber
+set number
 
 "folding settings
 set foldmethod=indent   "fold based on indent
