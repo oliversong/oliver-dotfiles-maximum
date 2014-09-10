@@ -5,9 +5,6 @@ call pathogen#infect()
 " don't bother with vi compatibility
 set nocompatible
 
-" set up Vundle
-filetype off
-
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()

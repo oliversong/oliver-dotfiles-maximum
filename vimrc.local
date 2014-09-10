@@ -13,8 +13,8 @@ let NERDTreeIgnore = ['\.pyc$']
 set laststatus=2
 
 " Broken down into easily includeable segments
-let g:airline_section_b = '%f'
-let g:airline_section_c = '%t'
+let g:airline_section_c = '%f %m'
+let g:airline_section_b = '%t'
 let g:airline_section_x = ''
 let g:airline_section_y = '%Y'
 "set statusline+=\ [%{&ff}/%Y]            " filetype
