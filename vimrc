@@ -25,6 +25,13 @@ set guioptions-=r
 set guioptions-=L
 set guifont=Monaco\ for\ Powerline:h12
 
+" set background color based on time of day, dark beginning at 6pm
+if strftime("%H") < 18
+  set background=light
+else
+  set background=dark
+endif
+
 " enable syntax highlighting
 syntax enable
 
@@ -75,7 +82,7 @@ imap OA <up>
 imap OC <right>
 imap OB <down>
 map <leader>l :Align
-nmap <leader>a :Ack 
+nmap <leader>a :Ag --smart-case 
 nmap <leader>b :CommandTBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
@@ -112,6 +119,7 @@ let g:go_fmt_autosave = 0
 " let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_add_preview_to_completeopt = 0
 set completeopt-=preview
+let g:JSHintUpdateWriteOnly=1
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
