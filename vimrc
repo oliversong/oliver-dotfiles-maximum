@@ -120,6 +120,16 @@ let g:go_fmt_autosave = 0
 let g:ycm_add_preview_to_completeopt = 0
 set completeopt-=preview
 let g:JSHintUpdateWriteOnly=1
+let g:jsx_ext_required = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['jsxhint']
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
