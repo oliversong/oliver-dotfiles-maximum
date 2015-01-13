@@ -8,6 +8,26 @@ Install
 
     rake
 
+
+Use
+---
+
+Use git submodules to add new things like Vim plugins
+
+    cd vim/bundle/
+    git submodule add ssh://blah submodule_dir
+    git submodule init
+
+Updating
+
+    cd submodule_dir
+    git checkout master
+    git pull
+
+Or
+
+    git submodule foreach git pull origin master
+
 Troubleshoot
 ------------
 
