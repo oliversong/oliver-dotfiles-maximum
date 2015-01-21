@@ -26,7 +26,7 @@ set guioptions-=L
 set guifont=Monaco\ for\ Powerline:h12
 
 " set background color based on time of day, dark beginning at 6pm
-if strftime("%H") < 18
+if strftime("%H") < 18 && strftime("%H") > 6
   set background=light
 else
   set background=dark
@@ -133,7 +133,7 @@ let g:syntastic_javascript_checkers = ['jsxhint']
 let g:syntastic_mode_map = {
         \ "mode": "active",
         \ "active_filetypes": [],
-        \ "passive_filetypes": ["css", ""] }
+        \ "passive_filetypes": ["css", "python"] }
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
