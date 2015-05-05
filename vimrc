@@ -44,7 +44,7 @@ set directory-=.   " don't store swapfiles in the current directory
 set encoding=utf-8
 set expandtab      " expand tabs to spaces
 set ignorecase     " case-insensitive search
-set incsearch      " search as you type
+" set incsearch      " search as you type
 set hlsearch
 set laststatus=2   " always show statusline
 set list           " show trailing whitespace
@@ -58,7 +58,7 @@ set showcmd
 set smartcase      " case-sensitive search if any caps
 set softtabstop=2  " insert mode tab and backspace use 2 spaces
 set tabstop=8      " actual tabs occupy 8 characters
-set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc,packages/**
+set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc,packages/**,*.pyc
 set wildmenu       " show a navigable menu for tab completion
 set wildmode=longest,list,full
 set mouse=a
@@ -69,7 +69,7 @@ set number
 set foldmethod=indent   "fold based on indent
 set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
+set foldlevelstart=99   "dont start with closed folds
 
 " keyboard shortcuts
 let mapleader = ','
@@ -107,6 +107,7 @@ function! s:setupMarkup()
 endfunction
 
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+au BufRead,BufNewFile *.json set filetype=json
 
 " plugin settings
 let g:CommandTMaxHeight=20
@@ -127,13 +128,17 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['jsxhint']
+let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
+let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_mode_map = {
         \ "mode": "active",
         \ "active_filetypes": [],
         \ "passive_filetypes": ["css", "python"] }
+let g:syntastic_html_tidy_ignore_errors = [ 'trimming empty' ]
+" let g:syntastic_html_tidy_args = '--show-warnings false'
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml

@@ -97,9 +97,6 @@
 [submodule "vim/bundle/python"]
 	path = vim/bundle/python
 	url = git@github.com:hdima/python-syntax.git
-[submodule "vim/bundle/vim-surround"]
-        path = vim/bundle/vim-surround
-        url = git@github.com:tpope/vim-surround.git
 [submodule "vim/bundle/vim-jsx"]
 	path = vim/bundle/vim-jsx
 	url = git@github.com:mxw/vim-jsx.git
