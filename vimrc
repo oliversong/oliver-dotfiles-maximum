@@ -112,7 +112,7 @@ au BufRead,BufNewFile *.json set filetype=json
 " plugin settings
 let g:CommandTMaxHeight=20
 let g:NERDSpaceDelims=1
-let g:gitgutter_enabled = 0
+let g:gitgutter_enabled = 1
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:airline_powerline_fonts = 1
 let g:go_fmt_autosave = 0
