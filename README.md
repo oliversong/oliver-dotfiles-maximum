@@ -12,21 +12,12 @@ Install
 Use
 ---
 
-Use git submodules to add new things like Vim plugins
-
-    cd vim/bundle/
-    git submodule add ssh://blah submodule_dir
-    git submodule init
+Use Vundle to add plugins and keep old plugins updated. Add lines to `vimrc`.
 
 Updating
 
-    cd submodule_dir
-    git checkout master
-    git pull
-
-Or
-
-    git submodule foreach git pull origin master
+    vim
+    :PluginUpdate
 
 Troubleshoot
 ------------
