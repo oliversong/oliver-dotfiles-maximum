@@ -99,15 +99,15 @@ task :default do
   Rake::Task['install:ctags'].invoke
   Rake::Task['install:reattach_to_user_namespace'].invoke
   Rake::Task['install:tmux'].invoke
-  Rake::Task['install:macvim'].invoke
+  # Rake::Task['install:macvim'].invoke
 
-  step 'git submodules'
-  sh 'git submodule update --init'
+  # step 'git submodules'
+  # sh 'git submodule update --init'
 
-  step 'command-t'
-  Dir.chdir 'vim/bundle/command-t' do
-    sh 'env PATH=/bin:/usr/bin rake make'
-  end
+  # step 'command-t'
+  # Dir.chdir 'vim/bundle/command-t' do
+  #   sh 'env PATH=/bin:/usr/bin rake make'
+  # end
 
   # TODO install gem ctags?
   # TODO run gem ctags?

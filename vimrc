@@ -1,17 +1,48 @@
-" set up pathogen, https://github.com/tpope/vim-pathogen
+set nocompatible     " don't bother with vi compatibility
 filetype off
-call pathogen#infect()
-
-" don't bother with vi compatibility
-set nocompatible
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-commentary'
+Plugin 'wincent/command-t'
+Plugin 'vim-scripts/Align'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'rking/ag.vim'
+Plugin 'Townk/vim-autoclose'
+Plugin 'bkad/CamelCaseMotion'
+Plugin 'tpope/vim-endwise'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'pangloss/vim-javascript'
+Plugin 'tomasr/molokai'
+Plugin 'hdima/python-syntax'
+Plugin 'tpope/vim-ragtag'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
+Plugin 'bling/vim-airline'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'fatih/vim-go'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'mxw/vim-jsx'
+Plugin 'groenewege/vim-less'
+Plugin 'tpope/vim-vividchalk'
+Plugin 'ntpeters/vim-better-whitespace'
 
+call vundle#end()
 filetype plugin indent on
 
 " Brief help
@@ -89,7 +120,7 @@ nmap <leader>f :NERDTreeFind<CR>
 nmap <leader>t :CommandT<CR>
 nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
 nmap <leader>] :TagbarToggle<CR>
-nmap <leader><space> :call whitespace#strip_trailing()<CR>
+nmap <leader><space> :StripWhitespace<CR>
 nmap <leader>g :ToggleGitGutter<CR>
 nmap <leader>hl :let @/ = ""<CR>
 
@@ -144,13 +175,6 @@ let g:syntastic_html_tidy_ignore_errors = [ 'trimming empty' ]
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
 " md is markdown
 autocmd BufRead,BufNewFile *.md set filetype=markdown
-" extra rails.vim help
-autocmd User Rails silent! Rnavcommand decorator      app/decorators            -glob=**/* -suffix=_decorator.rb
-autocmd User Rails silent! Rnavcommand observer       app/observers             -glob=**/* -suffix=_observer.rb
-autocmd User Rails silent! Rnavcommand feature        features                  -glob=**/* -suffix=.feature
-autocmd User Rails silent! Rnavcommand job            app/jobs                  -glob=**/* -suffix=_job.rb
-autocmd User Rails silent! Rnavcommand mediator       app/mediators             -glob=**/* -suffix=_mediator.rb
-autocmd User Rails silent! Rnavcommand stepdefinition features/step_definitions -glob=**/* -suffix=_steps.rb
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
