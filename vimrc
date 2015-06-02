@@ -14,12 +14,11 @@ Plugin 'vim-scripts/Align'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rking/ag.vim'
-Plugin 'Townk/vim-autoclose'
+Plugin 'Raimondi/delimitMate'
 Plugin 'bkad/CamelCaseMotion'
-Plugin 'tpope/vim-endwise'
+"Plugin 'tpope/vim-endwise'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'pangloss/vim-javascript'
 Plugin 'tomasr/molokai'
 Plugin 'hdima/python-syntax'
 Plugin 'tpope/vim-ragtag'
@@ -41,6 +40,12 @@ Plugin 'mxw/vim-jsx'
 Plugin 'groenewege/vim-less'
 Plugin 'tpope/vim-vividchalk'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'othree/yajs.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'vim-scripts/gitignore'
+Plugin 'terryma/vim-expand-region'
+Plugin 'mattn/webapi-vim'
+Plugin 'mmozuras/vim-github-comment'
 
 call vundle#end()
 filetype plugin indent on
@@ -89,7 +94,7 @@ set showcmd
 set smartcase      " case-sensitive search if any caps
 set softtabstop=2  " insert mode tab and backspace use 2 spaces
 set tabstop=8      " actual tabs occupy 8 characters
-set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc,packages/**,*.pyc
+set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc,packages/**,*.pyc,**/site-packages/*,**/env/*
 set wildmenu       " show a navigable menu for tab completion
 set wildmode=longest,list,full
 set mouse=a
@@ -125,23 +130,29 @@ nmap <leader>g :ToggleGitGutter<CR>
 nmap <leader>hl :let @/ = ""<CR>
 
 " configure camelcasemotion to overwrite w b e keys
-map w <Plug>CamelCaseMotion_w
-map b <Plug>CamelCaseMotion_b
-map e <Plug>CamelCaseMotion_e
-sunmap w
-sunmap b
-sunmap e
+map <S-W> <Plug>CamelCaseMotion_w
+map <S-B> <Plug>CamelCaseMotion_b
+map <S-E> <Plug>CamelCaseMotion_e
 
 " markdown previews in Marked.app
 function! s:setupMarkup()
   nnoremap <leader>md :silent !open -a Marked.app '%:p'<cr>
 endfunction
 
+" set up SyntaxComplete
+if has("autocmd") && exists("+omnifunc")
+  autocmd Filetype *
+        \ if &omnifunc == "" |
+        \   setlocal omnifunc=syntaxcomplete#Complete |
+        \ endif
+endif
+
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 au BufRead,BufNewFile *.json set filetype=json
 
 " plugin settings
 let g:CommandTMaxHeight=20
+let g:CommandTFileScanner='git'
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 1
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -150,12 +161,14 @@ let g:go_fmt_autosave = 0
 " let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_register_as_syntastic_checker = 0
 set completeopt-=preview
 let g:JSHintUpdateWriteOnly=1
-let g:jsx_ext_required = 0
+let g:jsx_ext_required = 1
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+let g:used_javascript_libs = 'jquery,underscore,backbone,react,flux,requirejs,jasmine'
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -170,6 +183,7 @@ let g:syntastic_mode_map = {
         \ "passive_filetypes": ["css", "python"] }
 let g:syntastic_html_tidy_ignore_errors = [ 'trimming empty' ]
 " let g:syntastic_html_tidy_args = '--show-warnings false'
+let g:github_user = 'oliversong'
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
@@ -177,6 +191,10 @@ autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
+
+" vim-expand-region map to v
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " Fix Cursor in TMUX
 if exists('$TMUX')
