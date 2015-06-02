@@ -184,6 +184,7 @@ let g:syntastic_mode_map = {
 let g:syntastic_html_tidy_ignore_errors = [ 'trimming empty' ]
 " let g:syntastic_html_tidy_args = '--show-warnings false'
 let g:github_user = 'oliversong'
+let g:github_comment_open_browser = 1
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
