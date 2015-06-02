@@ -16,7 +16,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'bkad/CamelCaseMotion'
-"Plugin 'tpope/vim-endwise'
+"Plugin 'tpope/vim-endwise' do this and delimitMate conflict?
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'tomasr/molokai'
@@ -46,6 +46,7 @@ Plugin 'vim-scripts/gitignore'
 Plugin 'terryma/vim-expand-region'
 Plugin 'mattn/webapi-vim'
 Plugin 'mmozuras/vim-github-comment'
+Plugin 'vim-scripts/YankRing.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -128,6 +129,7 @@ nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
 nmap <leader>g :ToggleGitGutter<CR>
 nmap <leader>hl :let @/ = ""<CR>
+nnoremap <leader>y :YRShow<cr>
 
 " configure camelcasemotion to overwrite w b e keys
 map <S-W> <Plug>CamelCaseMotion_w
