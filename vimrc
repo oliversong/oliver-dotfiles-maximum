@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-commentary'
 Plugin 'wincent/command-t'
@@ -16,7 +16,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'bkad/CamelCaseMotion'
-"Plugin 'tpope/vim-endwise' do this and delimitMate conflict?
+Plugin 'tpope/vim-endwise' " endwise must come after delimitMate
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'tomasr/molokai'
@@ -72,6 +72,7 @@ endif
 " enable syntax highlighting
 syntax enable
 
+set smartindent
 set autoindent
 set autoread       " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2    " Fix broken backspace in some setups
@@ -130,6 +131,8 @@ nmap <leader><space> :StripWhitespace<CR>
 nmap <leader>g :ToggleGitGutter<CR>
 nmap <leader>hl :let @/ = ""<CR>
 nnoremap <leader>y :YRShow<cr>
+inoremap {<CR> {<CR>}<Esc>O
+nnoremap <C-W>s Hmx`` \|:split<CR>`xzt``
 
 " configure camelcasemotion to overwrite w b e keys
 map <S-W> <Plug>CamelCaseMotion_w
@@ -210,14 +213,5 @@ endif
 
 " Go crazy!
 if filereadable(expand("~/.vimrc.local"))
-  " In your .vimrc.local, you might like:
-  "
-  " set autowrite
-  " set nocursorline
-  " set nowritebackup
-  " set whichwrap+=<,>,h,l,[,] " Wrap arrow keys between lines
-  "
-  " autocmd! bufwritepost .vimrc source ~/.vimrc
-  " noremap! jj <ESC>
   source ~/.vimrc.local
 endif
