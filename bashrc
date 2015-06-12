@@ -24,7 +24,6 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-
 function path(){
   old=$IFS
   IFS=:
@@ -73,11 +72,9 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 #source ~/git-completion.bash
-source ~/.rvm/scripts/rvm
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
 export EDITOR=/usr/local/Cellar/macvim/7.4-76/bin/mvim
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

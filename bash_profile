@@ -1,5 +1,5 @@
-export CLICOLOR=1
-export LSCOLORS=Exfxcxdxbxegedabagacad
+# export CLICOLOR=1
+# export LSCOLORS=Exfxcxdxbxegedabagacad
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
@@ -19,5 +19,14 @@ source /usr/local/bin/virtualenvwrapper.sh
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
+
+# Customize to your needs...
+export PATH=$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin:/Users/oliversong/.ec2/bin
+
+GOROOT=/usr/local/go
+export GOPATH=$HOME/Development/6.824 # export makes the variable available to processes
+PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

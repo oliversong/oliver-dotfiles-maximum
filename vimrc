@@ -47,6 +47,7 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'mattn/webapi-vim'
 Plugin 'mmozuras/vim-github-comment'
 Plugin 'vim-scripts/YankRing.vim'
+Plugin 'vim-scripts/CursorLineCurrentWindow'
 
 call vundle#end()
 filetype plugin indent on
@@ -179,8 +180,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['jsxhint']
-let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_mode_map = {
         \ "mode": "active",

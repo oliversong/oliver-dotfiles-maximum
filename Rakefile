@@ -120,6 +120,7 @@ task :default do
   ln_sf File.expand_path('vimrc.local'),  File.expand_path('~/.vimrc.local'),  :verbose => true
   ln_sf File.expand_path('bashrc'),       File.expand_path('~/.bashrc'),       :verbose => true
   ln_sf File.expand_path('zshrc'),        File.expand_path('~/.zshrc'),        :verbose => true
+  ln_sf File.expand_path('eslintrc'),     File.expand_path('~/.eslintrc'),     :verbose => true
   ln_sf File.expand_path('ackrc'),        File.expand_path('~/.ackrc'),        :verbose => true
   ln_sf File.expand_path('bash_aliases'), File.expand_path('~/.bash_aliases'), :verbose => true
   ln_sf File.expand_path('bash_profile'), File.expand_path('~/.bash_profile'), :verbose => true

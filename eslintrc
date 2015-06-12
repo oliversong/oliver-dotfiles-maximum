@@ -1,0 +1,37 @@
+{
+    "rules": {
+        "indent": [
+            2,
+            2
+        ],
+        "quotes": [
+            2,
+            "single"
+        ],
+        "linebreak-style": [
+            2,
+            "unix"
+        ],
+        "semi": [
+            2,
+            "always"
+        ],
+        "no-multi-spaces": 0,
+        "strict": 0,
+        "no-loop-func": 0,
+        "no-unused-vars": 0,
+        "camelcase": 0,
+        "no-process-exit": 0
+    },
+    "env": {
+        "es6": true,
+        "node": true,
+        "browser": true
+    },
+    "ecmaFeatures": {
+        "jsx": true
+    },
+    "plugins": [
+        "react"
+    ]
+}

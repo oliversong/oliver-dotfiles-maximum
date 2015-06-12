@@ -41,6 +41,7 @@ source ~/.oh-my-zsh/z.sh
 # VCS as dirty. This makes repository status check for large repositories much,
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
+setopt NO_NOMATCH
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -50,12 +51,3 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 DEFAULT_USER="oliversong"
 
-# Customize to your needs...
-export PATH=~/bin:/usr/local/bin:$PATH:/usr/bin:/Users/oliversong/.rvm/gems/ruby-1.9.2-p320/bin:/Users/oliversong/.rvm/gems/ruby-1.9.2-p320@global/bin:/Users/oliversong/.rvm/rubies/ruby-1.9.2-p320/bin:/Users/oliversong/.rvm/bin:/bin:/usr/sbin:/sbin:/usr/texbin:/Users/oliversong/.ec2/bin:/Users/oliversong/.rvm/bin
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-GOROOT=/usr/local/go
-export GOPATH=$HOME/Development/6.824 # export makes the variable available to processes
-# export GOPATH=$HOME/Development/scryer
-PATH=$PATH:$GOROOT/bin:$GOPATH/bin
