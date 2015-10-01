@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-commentary'
 Plugin 'wincent/command-t'
@@ -32,15 +32,13 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 Plugin 'bling/vim-airline'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'fatih/vim-go'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'mxw/vim-jsx'
 Plugin 'groenewege/vim-less'
 Plugin 'tpope/vim-vividchalk'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'othree/yajs.vim'
+" Plugin 'othree/yajs.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'vim-scripts/gitignore'
 Plugin 'terryma/vim-expand-region'
@@ -48,6 +46,7 @@ Plugin 'mattn/webapi-vim'
 Plugin 'mmozuras/vim-github-comment'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'vim-scripts/CursorLineCurrentWindow'
+Plugin 'kchmck/vim-coffee-script'
 
 call vundle#end()
 filetype plugin indent on
@@ -145,14 +144,6 @@ function! s:setupMarkup()
   nnoremap <leader>md :silent !open -a Marked.app '%:p'<cr>
 endfunction
 
-" set up SyntaxComplete
-if has("autocmd") && exists("+omnifunc")
-  autocmd Filetype *
-        \ if &omnifunc == "" |
-        \   setlocal omnifunc=syntaxcomplete#Complete |
-        \ endif
-endif
-
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 au BufRead,BufNewFile *.json set filetype=json
 
@@ -179,24 +170,39 @@ let g:used_javascript_libs = 'jquery,underscore,backbone,react,flux,requirejs,ja
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_exec = 'eslint'
 let g:syntastic_json_checkers = ['jsonlint']
+let g:syntastic_python_checkers = ['flake8']
+" let g:syntastic_python_flake8_args='--ignore=E501'
 let g:syntastic_mode_map = {
         \ "mode": "active",
         \ "active_filetypes": [],
-        \ "passive_filetypes": ["css", "python"] }
+        \ "passive_filetypes": ["css"] }
 let g:syntastic_html_tidy_ignore_errors = [ 'trimming empty' ]
 " let g:syntastic_html_tidy_args = '--show-warnings false'
 let g:github_user = 'oliversong'
 let g:github_comment_open_browser = 1
 
-" fdoc is yaml
-autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
-" md is markdown
-autocmd BufRead,BufNewFile *.md set filetype=markdown
-" automatically rebalance windows on vim resize
-autocmd VimResized * :wincmd =
+augroup vimrc_autocmd
+  autocmd!
+
+  " set up SyntaxComplete
+  if has("autocmd") && exists("+omnifunc")
+    autocmd Filetype *
+          \ if &omnifunc == "" |
+          \   setlocal omnifunc=syntaxcomplete#Complete |
+          \ endif
+  endif
+
+  " fdoc is yaml
+  autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
+  " md is markdown
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+  " automatically rebalance windows on vim resize
+  autocmd VimResized * :wincmd =
+augroup END
 
 " vim-expand-region map to v
 vmap v <Plug>(expand_region_expand)
