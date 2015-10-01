@@ -1,4 +1,4 @@
 .DS_Store
 bash_aliases
 vim/bundle/*
-!vim/bundle/vim-fugitive/
+!vim/bundle/Vundle.vim/
