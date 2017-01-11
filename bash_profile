@@ -16,6 +16,8 @@ source /usr/local/bin/virtualenvwrapper.sh
 # export EC2_CERT=`ls $EC2_HOME/cert-*.pem`
 # export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home/
 
+eval $(thefuck --alias)
+
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi

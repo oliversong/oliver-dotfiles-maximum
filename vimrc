@@ -27,11 +27,12 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'garbas/vim-snipmate'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
-Plugin 'bling/vim-airline'
 Plugin 'fatih/vim-go'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Glench/Vim-Jinja2-Syntax'
@@ -47,6 +48,8 @@ Plugin 'mmozuras/vim-github-comment'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'vim-scripts/CursorLineCurrentWindow'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'vim-scripts/ReplaceWithRegister'
+Plugin 'FooSoft/vim-argwrap'
 
 call vundle#end()
 filetype plugin indent on
@@ -102,6 +105,7 @@ set wildmode=longest,list,full
 set mouse=a
 set relativenumber
 set number
+set colorcolumn=76
 
 "folding settings
 set foldmethod=indent   "fold based on indent
@@ -133,6 +137,7 @@ nmap <leader>hl :let @/ = ""<CR>
 nnoremap <leader>y :YRShow<cr>
 inoremap {<CR> {<CR>}<Esc>O
 nnoremap <C-W>s Hmx`` \|:split<CR>`xzt``
+nnoremap <silent> <leader>a :ArgWrap<CR>
 
 " configure camelcasemotion to overwrite w b e keys
 map <S-W> <Plug>CamelCaseMotion_w
@@ -150,6 +155,7 @@ au BufRead,BufNewFile *.json set filetype=json
 " plugin settings
 let g:CommandTMaxHeight=20
 let g:CommandTFileScanner='git'
+let g:CommandTRecursiveMatch=0
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 1
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -159,13 +165,12 @@ let g:go_fmt_autosave = 0
 " let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_register_as_syntastic_checker = 0
+let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
 set completeopt-=preview
 let g:JSHintUpdateWriteOnly=1
 let g:jsx_ext_required = 1
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 let g:used_javascript_libs = 'jquery,underscore,backbone,react,flux,requirejs,jasmine'
+let NERDTreeShowHidden=1
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1

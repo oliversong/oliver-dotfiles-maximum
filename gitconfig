@@ -4,7 +4,7 @@
     pager = less -R
     editor = vim
 [user]
-    email = osong@mit.edu
+    email = me@olli.es
     name = Oliver Song
 [alias]
     co = checkout
@@ -13,3 +13,5 @@
     br = branch
     hist = log --pretty=format:\"%C(yellow)%h %ad%Creset | %s%C(bold red)%d%Creset [%C(bold blue)%an%Creset]\" --graph --date=short
     rb = rebase
+[push]
+	default = matching
