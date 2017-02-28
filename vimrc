@@ -9,7 +9,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-commentary'
-Plugin 'wincent/command-t'
+Plugin 'junegunn/fzf'
 Plugin 'vim-scripts/Align'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdtree'
@@ -125,11 +125,9 @@ imap OC <right>
 imap OB <down>
 map <leader>l :Align
 nmap <leader>a :Ag --smart-case 
-nmap <leader>b :CommandTBuffer<CR>
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>t :CommandT<CR>
-nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
+nmap <leader>t :FZF<CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
 nmap <leader>g :ToggleGitGutter<CR>
@@ -153,9 +151,6 @@ au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 au BufRead,BufNewFile *.json set filetype=json
 
 " plugin settings
-let g:CommandTMaxHeight=20
-let g:CommandTFileScanner='git'
-let g:CommandTRecursiveMatch=0
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 1
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -180,15 +175,14 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_exec = 'eslint'
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_python_checkers = ['flake8']
-" let g:syntastic_python_flake8_args='--ignore=E501'
 let g:syntastic_mode_map = {
         \ "mode": "active",
         \ "active_filetypes": [],
         \ "passive_filetypes": ["css"] }
 let g:syntastic_html_tidy_ignore_errors = [ 'trimming empty' ]
-" let g:syntastic_html_tidy_args = '--show-warnings false'
 let g:github_user = 'oliversong'
 let g:github_comment_open_browser = 1
+let g:loaded_AlignMapsPlugin = 1 " short circuit alignmaps which screws up leader t
 
 augroup vimrc_autocmd
   autocmd!

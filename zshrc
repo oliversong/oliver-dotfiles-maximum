@@ -51,3 +51,5 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 DEFAULT_USER="oliversong"
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
