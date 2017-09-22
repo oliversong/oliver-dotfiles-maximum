@@ -15,3 +15,5 @@
     rb = rebase
 [push]
 	default = matching
+[credential]
+	helper = store

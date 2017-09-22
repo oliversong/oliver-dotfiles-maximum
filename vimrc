@@ -10,6 +10,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-commentary'
 Plugin 'junegunn/fzf'
+Plugin 'wincent/command-t'
 Plugin 'vim-scripts/Align'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdtree'
@@ -50,6 +51,7 @@ Plugin 'vim-scripts/CursorLineCurrentWindow'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/ReplaceWithRegister'
 Plugin 'FooSoft/vim-argwrap'
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -126,8 +128,10 @@ imap OB <down>
 map <leader>l :Align
 nmap <leader>a :Ag --smart-case 
 nmap <leader>d :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
-nmap <leader>t :FZF<CR>
+nmap <leader>F :NERDTreeFind<CR>
+nmap <leader>f :FZF<CR>
+nmap <leader>t :CommandT<CR>
+nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
 nmap <leader>g :ToggleGitGutter<CR>
@@ -151,6 +155,9 @@ au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 au BufRead,BufNewFile *.json set filetype=json
 
 " plugin settings
+let g:CommandTMaxHeight=20
+let g:CommandTFileScanner='git'
+let g:CommandTRecursiveMatch=0
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 1
 let g:ackprg = 'ag --nogroup --nocolor --column'

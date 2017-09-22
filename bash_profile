@@ -27,8 +27,9 @@ export PATH=$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/te
 
 GOROOT=/usr/local/go
 export GOPATH=$HOME/Development/6.824 # export makes the variable available to processes
-PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/Library/Python/2.7/bin" # Add Python bin to path
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

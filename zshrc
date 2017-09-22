@@ -51,5 +51,8 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 DEFAULT_USER="oliversong"
 
+export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.yarn/bin:$PATH"
