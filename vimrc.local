@@ -29,4 +29,8 @@ let g:airline_skip_empty_sections = 1
 "
 
 " keyboard shortcuts
-inoremap jj <ESC>
+let g:easyescape_chars = { "j": 2 }
+let g:easyescape_timeout = 2000
+cnoremap jj <ESC>
+let g:ycm_server_python_interpreter = '/usr/bin/python'
+let g:prettier#exec_cmd_path = "/Users/oliversong/co/backend/node_modules/.bin/prettier"

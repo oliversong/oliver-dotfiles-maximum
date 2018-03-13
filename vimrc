@@ -8,6 +8,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-commentary'
 Plugin 'junegunn/fzf'
 Plugin 'wincent/command-t'
@@ -52,6 +53,10 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/ReplaceWithRegister'
 Plugin 'FooSoft/vim-argwrap'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'prettier/vim-prettier'
+Plugin 'jparise/vim-graphql'
+Plugin 'zhou13/vim-easyescape'
+
 
 call vundle#end()
 filetype plugin indent on
@@ -136,10 +141,19 @@ nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
 nmap <leader>g :ToggleGitGutter<CR>
 nmap <leader>hl :let @/ = ""<CR>
+nmap <leader>gd :YcmCompleter GoToDefinition<CR>
+nmap <leader>gh :YcmCompleter GetType<CR>
 nnoremap <leader>y :YRShow<cr>
 inoremap {<CR> {<CR>}<Esc>O
 nnoremap <C-W>s Hmx`` \|:split<CR>`xzt``
 nnoremap <silent> <leader>a :ArgWrap<CR>
+" mappings for moving lines up and down
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap ˚ <Esc>:m .-2<CR>==gi
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
 
 " configure camelcasemotion to overwrite w b e keys
 map <S-W> <Plug>CamelCaseMotion_w
@@ -160,14 +174,23 @@ let g:CommandTFileScanner='git'
 let g:CommandTRecursiveMatch=0
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 1
-let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ackprg = 'ag --nogroup --nocolor --column --skip-vcs-ignores'
+let g:ag_prg = 'ag --nogroup --nocolor --column --skip-vcs-ignores'
 let g:airline_powerline_fonts = 1
+" configure go
 let g:go_fmt_autosave = 0
+let g:go_fmt_command = "goimports"
+autocmd FileType go setlocal tabstop=2|setlocal shiftwidth=2|setlocal softtabstop=2|setlocal noexpandtab
+autocmd FileType go compiler go
+au FileType go nmap gd <Plug>(go-def)
 " let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_register_as_syntastic_checker = 0
 let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
+let g:ycm_max_num_candidates = 5
+let g:ycm_max_num_identifier_candidates = 5
+let g:ycm_complete_in_strings = 0
 set completeopt-=preview
 let g:JSHintUpdateWriteOnly=1
 let g:jsx_ext_required = 1
@@ -180,16 +203,38 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_exec = 'eslint'
+let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_mode_map = {
         \ "mode": "active",
         \ "active_filetypes": [],
-        \ "passive_filetypes": ["css"] }
+        \ "passive_filetypes": ["css", "typescript"] }
 let g:syntastic_html_tidy_ignore_errors = [ 'trimming empty' ]
 let g:github_user = 'oliversong'
 let g:github_comment_open_browser = 1
 let g:loaded_AlignMapsPlugin = 1 " short circuit alignmaps which screws up leader t
+" max line length that prettier will wrap on
+let g:prettier#config#print_width = 80
+" number of spaces per indentation level
+let g:prettier#config#tab_width = 2
+" use tabs over spaces
+let g:prettier#config#use_tabs = 'false'
+" print semicolons
+let g:prettier#config#semi = 'true'
+" single quotes over double quotes
+let g:prettier#config#single_quote = 'false'
+" print spaces between brackets
+let g:prettier#config#bracket_spacing = 'true'
+" put > on the last line instead of new line
+let g:prettier#config#jsx_bracket_same_line = 'false'
+" none|es5|all
+let g:prettier#config#trailing_comma = 'all'
+" prettier autosave
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md Prettier
+" cli-override|file-override|prefer-file
+let g:prettier#config#config_precedence = 'cli-override'
 
 augroup vimrc_autocmd
   autocmd!
