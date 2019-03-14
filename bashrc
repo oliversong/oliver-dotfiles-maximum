@@ -78,3 +78,8 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 export EDITOR=mvim
+eval "$(direnv hook bash)"
+export PATH=$(pwd -P)/../../opt/node$NODE_VERSION/bin:$PATH
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

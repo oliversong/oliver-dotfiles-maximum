@@ -56,3 +56,8 @@ export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="$(pyenv root)/shims:$PATH"
+eval "$(direnv hook zsh)"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

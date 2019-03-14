@@ -1,7 +1,7 @@
 [color]
     ui = auto
 [core]
-    pager = less -R
+	pager = less -x 3,5
     editor = vim
 [user]
     email = me@olli.es
@@ -17,3 +17,12 @@
 	default = matching
 [credential]
 	helper = store
+[branch "master"]
+	rebase = true
+[merge "ours"]
+	driver = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

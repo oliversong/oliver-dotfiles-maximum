@@ -1,36 +1,5 @@
-set nocursorline " don't highlight current line
-set t_Co=256
-colorscheme solarized
-set cursorline
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-inoremap <special> <Esc> <Esc>kj
-set scrolljump=5
-
-xmap \\  <Plug>Commentary<CR>
-nmap \\  <CR><Plug>Commentary
-nmap \\\ <Plug>CommentaryLine<CR>
-nmap \\u <Plug>CommentaryUndo<CR>
-
 let NERDTreeIgnore = ['\.pyc$']
-
-set laststatus=2
-
-" Broken down into easily includeable segments
-let g:airline_section_b = '%t'
-let g:airline_section_c = '%f'
-let g:airline_section_x = ''
-let g:airline_section_y = '%Y'
-let g:airline_skip_empty_sections = 1
-"set statusline+=\ [%{&ff}/%Y]            " filetype
-"set statusline+=\ [%{getcwd()}]          " current dir
-"set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
-"set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-"
-
-" keyboard shortcuts
-let g:easyescape_chars = { "j": 2 }
-let g:easyescape_timeout = 2000
-cnoremap jj <ESC>
-let g:ycm_server_python_interpreter = '/usr/bin/python'
 let g:prettier#exec_cmd_path = "/Users/oliversong/co/backend/node_modules/.bin/prettier"
+let g:typescript_compiler_binary = "/Users/oliversong/co/backend/node_modules/.bin/tsc"
+" let g:ycm_path_to_python_interpreter = '/Users/oliversong/.pyenv/versions/3.7.0/bin/python3.7'
+" let g:ycm_server_python_interpreter = '/Users/oliversong/.pyenv/versions/3.7.0/bin/python3.7'

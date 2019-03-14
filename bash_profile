@@ -16,8 +16,6 @@ source /usr/local/bin/virtualenvwrapper.sh
 # export EC2_CERT=`ls $EC2_HOME/cert-*.pem`
 # export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home/
 
-eval $(thefuck --alias)
-
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
@@ -25,11 +23,8 @@ fi
 # Customize to your needs...
 export PATH=$PATH:$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/texbin:/Users/oliversong/.ec2/bin
 
-GOROOT=/usr/local/go
-export GOPATH=$HOME/Development/6.824 # export makes the variable available to processes
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$PATH:$HOME/Library/Python/2.7/bin" # Add Python bin to path
+export PATH=/Applications/MacVim.app/Contents/bin:$PATH
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

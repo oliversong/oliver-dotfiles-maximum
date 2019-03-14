@@ -1,6 +1,11 @@
+if has('python3')
+  silent! python3 1
+endif
+
 set nocompatible     " don't bother with vi compatibility
 filetype off
 
+let g:vundle_default_git_proto = 'git'
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -56,7 +61,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'prettier/vim-prettier'
 Plugin 'jparise/vim-graphql'
 Plugin 'zhou13/vim-easyescape'
-
+Plugin 'rhysd/conflict-marker.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -141,8 +146,10 @@ nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
 nmap <leader>g :ToggleGitGutter<CR>
 nmap <leader>hl :let @/ = ""<CR>
-nmap <leader>gd :YcmCompleter GoToDefinition<CR>
+nmap <leader>gd :YcmCompleter GoTo<CR>
+nmap <leader>gr :YcmCompleter GoToReferences<CR>
 nmap <leader>gh :YcmCompleter GetType<CR>
+nmap <leader>m :lopen<CR>
 nnoremap <leader>y :YRShow<cr>
 inoremap {<CR> {<CR>}<Esc>O
 nnoremap <C-W>s Hmx`` \|:split<CR>`xzt``
@@ -178,16 +185,31 @@ let g:ackprg = 'ag --nogroup --nocolor --column --skip-vcs-ignores'
 let g:ag_prg = 'ag --nogroup --nocolor --column --skip-vcs-ignores'
 let g:airline_powerline_fonts = 1
 " configure go
-let g:go_fmt_autosave = 0
+let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
+let g:go_fmt_options = {
+  \ 'goimports': ' -w -local samsaradev.io',
+  \ }
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'errcheck']
+let g:go_metalinter_enabled = ['vet', 'errcheck']
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_arguments = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+" let g:go_list_type = "quickfix"
 autocmd FileType go setlocal tabstop=2|setlocal shiftwidth=2|setlocal softtabstop=2|setlocal noexpandtab
 autocmd FileType go compiler go
-au FileType go nmap gd <Plug>(go-def)
+autocmd FileType go nmap <leader>gd :GoDef<CR>
 " let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_register_as_syntastic_checker = 0
-let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
 let g:ycm_max_num_candidates = 5
 let g:ycm_max_num_identifier_candidates = 5
 let g:ycm_complete_in_strings = 0
@@ -206,35 +228,19 @@ let g:syntastic_javascript_exec = 'eslint'
 let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_go_checkers = ['golint', 'govet']
 let g:syntastic_mode_map = {
         \ "mode": "active",
         \ "active_filetypes": [],
-        \ "passive_filetypes": ["css", "typescript"] }
+        \ "passive_filetypes": ["css", "typescript", "go"] }
 let g:syntastic_html_tidy_ignore_errors = [ 'trimming empty' ]
+
 let g:github_user = 'oliversong'
 let g:github_comment_open_browser = 1
 let g:loaded_AlignMapsPlugin = 1 " short circuit alignmaps which screws up leader t
-" max line length that prettier will wrap on
-let g:prettier#config#print_width = 80
-" number of spaces per indentation level
-let g:prettier#config#tab_width = 2
-" use tabs over spaces
-let g:prettier#config#use_tabs = 'false'
-" print semicolons
-let g:prettier#config#semi = 'true'
-" single quotes over double quotes
-let g:prettier#config#single_quote = 'false'
-" print spaces between brackets
-let g:prettier#config#bracket_spacing = 'true'
-" put > on the last line instead of new line
-let g:prettier#config#jsx_bracket_same_line = 'false'
-" none|es5|all
-let g:prettier#config#trailing_comma = 'all'
 " prettier autosave
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md Prettier
-" cli-override|file-override|prefer-file
-let g:prettier#config#config_precedence = 'cli-override'
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.graphql,*.md Prettier
 
 augroup vimrc_autocmd
   autocmd!
@@ -258,6 +264,38 @@ augroup END
 " vim-expand-region map to v
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
+
+set nocursorline " don't highlight current line
+set t_Co=256
+colorscheme solarized
+set cursorline
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+inoremap <special> <Esc> <Esc>kj
+set scrolljump=5
+
+xmap \\  <Plug>Commentary<CR>
+nmap \\  <CR><Plug>Commentary
+nmap \\\ <Plug>CommentaryLine<CR>
+nmap \\u <Plug>CommentaryUndo<CR>
+
+set laststatus=2
+
+" Broken down into easily includeable segments
+let g:airline_section_b = '%t'
+let g:airline_section_c = '%f'
+let g:airline_section_x = ''
+let g:airline_section_y = '%Y'
+let g:airline_skip_empty_sections = 1
+"set statusline+=\ [%{&ff}/%Y]            " filetype
+"set statusline+=\ [%{getcwd()}]          " current dir
+"set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
+"set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+
+" keyboard shortcuts
+let g:easyescape_chars = { "j": 2 }
+let g:easyescape_timeout = 2000
+cnoremap jj <ESC>
 
 " Fix Cursor in TMUX
 if exists('$TMUX')
