@@ -57,7 +57,9 @@ Plugin 'vim-scripts/CursorLineCurrentWindow'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/ReplaceWithRegister'
 Plugin 'FooSoft/vim-argwrap'
+Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
 Plugin 'prettier/vim-prettier'
 Plugin 'jparise/vim-graphql'
 Plugin 'zhou13/vim-easyescape'
@@ -139,9 +141,10 @@ map <leader>l :Align
 nmap <leader>a :Ag --smart-case 
 nmap <leader>d :NERDTreeToggle<CR>
 nmap <leader>F :NERDTreeFind<CR>
-nmap <leader>f :FZF<CR>
-nmap <leader>t :CommandT<CR>
-nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
+nmap <leader>f :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
+nmap <leader>t :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standard --others --cached'}))<CR>
+" nmap <leader>t :CommandT<CR>
+" nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
 nmap <leader>g :ToggleGitGutter<CR>
@@ -181,8 +184,8 @@ let g:CommandTFileScanner='git'
 let g:CommandTRecursiveMatch=0
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 1
-let g:ackprg = 'ag --nogroup --nocolor --column --skip-vcs-ignores'
-let g:ag_prg = 'ag --nogroup --nocolor --column --skip-vcs-ignores'
+let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ag_prg = 'ag --nogroup --nocolor --column'
 let g:airline_powerline_fonts = 1
 " configure go
 let g:go_fmt_autosave = 1
@@ -206,13 +209,31 @@ let g:go_highlight_variable_assignments = 1
 autocmd FileType go setlocal tabstop=2|setlocal shiftwidth=2|setlocal softtabstop=2|setlocal noexpandtab
 autocmd FileType go compiler go
 autocmd FileType go nmap <leader>gd :GoDef<CR>
+autocmd FileType typescript,typescript.tsx nmap <leader>gd :TsuDefinition<CR>
+autocmd FileType typescript,typescript.tsx nmap <leader>gr :TsuReferences<CR>
 " let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_register_as_syntastic_checker = 0
-let g:ycm_max_num_candidates = 5
-let g:ycm_max_num_identifier_candidates = 5
-let g:ycm_complete_in_strings = 0
+" let g:ycm_add_preview_to_completeopt = 0
+" let g:ycm_register_as_syntastic_checker = 0
+" let g:ycm_max_num_candidates = 5
+" let g:ycm_max_num_identifier_candidates = 5
+" let g:ycm_complete_in_strings = 0
+" let g:ycm_semantic_triggers =  {
+"             \   'c' : ['->', '.'],
+"             \   'objc' : ['->', '.'],
+"             \   'ocaml' : ['.', '#'],
+"             \   'cpp,objcpp' : ['->', '.', '::'],
+"             \   'perl' : ['->'],
+"             \   'php' : ['->', '::', '"', "'", 'use ', 'namespace ', '\'],
+"             \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+"             \   'html': ['<', '"', '</', ' '],
+"             \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
+"             \   'ruby' : ['.', '::'],
+"             \   'lua' : ['.', ':'],
+"             \   'erlang' : [':'],
+"             \   'haskell' : ['.', 're!.']
+"             \ }
+set completeopt=longest,menuone
 set completeopt-=preview
 let g:JSHintUpdateWriteOnly=1
 let g:jsx_ext_required = 1
@@ -222,17 +243,18 @@ let NERDTreeShowHidden=1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_exec = 'eslint'
-let g:syntastic_typescript_checkers = ['tslint']
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_go_checkers = ['golint', 'govet']
 let g:syntastic_mode_map = {
         \ "mode": "active",
         \ "active_filetypes": [],
-        \ "passive_filetypes": ["css", "typescript", "go"] }
+        \ "passive_filetypes": ["css", "go"] }
 let g:syntastic_html_tidy_ignore_errors = [ 'trimming empty' ]
 
 let g:github_user = 'oliversong'
@@ -244,14 +266,6 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.graphql,*.
 
 augroup vimrc_autocmd
   autocmd!
-
-  " set up SyntaxComplete
-  if has("autocmd") && exists("+omnifunc")
-    autocmd Filetype *
-          \ if &omnifunc == "" |
-          \   setlocal omnifunc=syntaxcomplete#Complete |
-          \ endif
-  endif
 
   " fdoc is yaml
   autocmd BufRead,BufNewFile *.fdoc set filetype=yaml

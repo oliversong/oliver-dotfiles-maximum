@@ -6,11 +6,11 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 source ~/.bash_profile
 
-source ~/.oh-my-zsh/z.sh
+source ~/Development/z/z.sh
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -40,7 +40,7 @@ source ~/.oh-my-zsh/z.sh
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
 # much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 setopt NO_NOMATCH
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
@@ -58,6 +58,35 @@ export PATH="/usr/local/opt/postgresql@9.4/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="$(pyenv root)/shims:$PATH"
 eval "$(direnv hook zsh)"
+export PATH="$HOME/.fastlane/bin:$PATH"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH=“$HOME/.rbenv/bin:$PATH”
+source <(rbenv init -)
+
+# Fix z.sh race condition
+if [ "$_Z_NO_RESOLVE_SYMLINKS" ]; then
+    _z_precmd() {
+        (_z --add "${PWD:a}" &)
+		: $RANDOM
+    }
+else
+    _z_precmd() {
+        (_z --add "${PWD:A}" &)
+		: $RANDOM
+    }
+fi
+
+tr() {
+  CMD=$1
+
+  if [[ $1 == "ls" ]]; then
+    taskrunner --list | fzf | read CMD
+  fi
+
+  taskrunner $CMD
+}
+
+[[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

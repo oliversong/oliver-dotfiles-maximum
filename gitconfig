@@ -4,7 +4,7 @@
 	pager = less -x 3,5
     editor = vim
 [user]
-    email = me@olli.es
+    email = oliver.song@samsara.com
     name = Oliver Song
 [alias]
     co = checkout
