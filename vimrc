@@ -262,6 +262,7 @@ let g:github_comment_open_browser = 1
 let g:loaded_AlignMapsPlugin = 1 " short circuit alignmaps which screws up leader t
 " prettier autosave
 let g:prettier#autoformat = 0
+let g:snipMate = { 'snippet_version' : 1 }
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.graphql,*.md Prettier
 
 augroup vimrc_autocmd

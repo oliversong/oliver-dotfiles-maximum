@@ -1,10 +1,10 @@
 [color]
     ui = auto
 [core]
-	pager = less -x 3,5
+    pager = less -x 3,5
     editor = vim
 [user]
-    email = oliver.song@samsara.com
+    email = me@oliversong.net
     name = Oliver Song
 [alias]
     co = checkout
