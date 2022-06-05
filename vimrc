@@ -2,77 +2,63 @@ if has('python3')
   silent! python3 1
 endif
 
-set nocompatible     " don't bother with vi compatibility
-filetype off
+call plug#begin('~/.vim/bundle')
+Plug 'Valloric/YouCompleteMe'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-commentary'
+Plug 'junegunn/fzf'
+Plug 'wincent/command-t'
+Plug 'vim-scripts/Align'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree'
+Plug 'rking/ag.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'bkad/CamelCaseMotion'
+Plug 'tpope/vim-endwise' " endwise must come after delimitMate
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'tomasr/molokai'
+Plug 'hdima/python-syntax'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'vim-ruby/vim-ruby'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'garbas/vim-snipmate'
+Plug 'altercation/vim-colors-solarized'
+Plug 'scrooloose/syntastic'
+Plug 'majutsushi/tagbar'
+Plug 'fatih/vim-go'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'groenewege/vim-less'
+Plug 'tpope/vim-vividchalk'
+Plug 'ntpeters/vim-better-whitespace'
+" Plug 'othree/yajs.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'vim-scripts/gitignore'
+Plug 'terryma/vim-expand-region'
+Plug 'mattn/webapi-vim'
+Plug 'mmozuras/vim-github-comment'
+Plug 'vim-scripts/YankRing.vim'
+Plug 'vim-scripts/CursorLineCurrentWindow'
+Plug 'kchmck/vim-coffee-script'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'FooSoft/vim-argwrap'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'prettier/vim-prettier'
+Plug 'jparise/vim-graphql'
+Plug 'zhou13/vim-easyescape'
+Plug 'rhysd/conflict-marker.vim'
+Plug 'TovarishFin/vim-solidity'
 
-let g:vundle_default_git_proto = 'git'
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'tpope/vim-commentary'
-Plugin 'junegunn/fzf'
-Plugin 'wincent/command-t'
-Plugin 'vim-scripts/Align'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'rking/ag.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'bkad/CamelCaseMotion'
-Plugin 'tpope/vim-endwise' " endwise must come after delimitMate
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'tomasr/molokai'
-Plugin 'hdima/python-syntax'
-Plugin 'tpope/vim-ragtag'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'garbas/vim-snipmate'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/syntastic'
-Plugin 'majutsushi/tagbar'
-Plugin 'fatih/vim-go'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'groenewege/vim-less'
-Plugin 'tpope/vim-vividchalk'
-Plugin 'ntpeters/vim-better-whitespace'
-" Plugin 'othree/yajs.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'vim-scripts/gitignore'
-Plugin 'terryma/vim-expand-region'
-Plugin 'mattn/webapi-vim'
-Plugin 'mmozuras/vim-github-comment'
-Plugin 'vim-scripts/YankRing.vim'
-Plugin 'vim-scripts/CursorLineCurrentWindow'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'vim-scripts/ReplaceWithRegister'
-Plugin 'FooSoft/vim-argwrap'
-Plugin 'peitalin/vim-jsx-typescript'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/tsuquyomi'
-Plugin 'prettier/vim-prettier'
-Plugin 'jparise/vim-graphql'
-Plugin 'zhou13/vim-easyescape'
-Plugin 'rhysd/conflict-marker.vim'
-
-call vundle#end()
-filetype plugin indent on
-
-" Brief help
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
+call plug#end()
 
 " macvim settings
 set guioptions-=r
