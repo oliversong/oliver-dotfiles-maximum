@@ -3,7 +3,14 @@ if has('python3')
 endif
 
 call plug#begin('~/.vim/bundle')
-Plug 'Valloric/YouCompleteMe'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-commentary'
@@ -29,6 +36,9 @@ Plug 'tomtom/tlib_vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'garbas/vim-snipmate'
+if has('nvim')
+  Plug 'overcache/NeoSolarized'
+endif
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
@@ -52,18 +62,31 @@ Plug 'FooSoft/vim-argwrap'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
-Plug 'prettier/vim-prettier'
+" Plug 'prettier/vim-prettier'
+Plug 'sbdchd/neoformat'
 Plug 'jparise/vim-graphql'
 Plug 'zhou13/vim-easyescape'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'TovarishFin/vim-solidity'
+Plug 'pantharshit00/vim-prisma'
+Plug 'github/copilot.vim'
+if has('nvim')
+  " Installs and builds vimproc (required to launch tsserver)
+  Plug 'Shougo/vimproc.vim', {'do': 'make'}
+  " Plug 'rudism/deoplete-tsuquyomi'
+endif
 
 call plug#end()
 
 " macvim settings
 set guioptions-=r
 set guioptions-=L
-set guifont=Monaco\ for\ Powerline:h12
+
+if has('nvim')
+  set guifont=Monaco\ for\ Powerline:h13
+else
+  set guifont=Monaco\ for\ Powerline:h12
+endif
 
 " set background color based on time of day, dark beginning at 6pm
 if strftime("%H") < 18 && strftime("%H") > 6
@@ -133,16 +156,24 @@ nmap <leader>t :call fzf#run(fzf#wrap({'source': 'git ls-files --exclude-standar
 " nmap <leader>T :CommandTFlush<CR>:CommandT<CR>
 nmap <leader>] :TagbarToggle<CR>
 nmap <leader><space> :StripWhitespace<CR>
-nmap <leader>g :ToggleGitGutter<CR>
 nmap <leader>hl :let @/ = ""<CR>
-nmap <leader>gd :YcmCompleter GoTo<CR>
-nmap <leader>gr :YcmCompleter GoToReferences<CR>
-nmap <leader>gh :YcmCompleter GetType<CR>
 nmap <leader>m :lopen<CR>
 nnoremap <leader>y :YRShow<cr>
 inoremap {<CR> {<CR>}<Esc>O
 nnoremap <C-W>s Hmx`` \|:split<CR>`xzt``
 nnoremap <silent> <leader>a :ArgWrap<CR>
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
 " mappings for moving lines up and down
 nnoremap ∆ :m .+1<CR>==
 nnoremap ˚ :m .-2<CR>==
@@ -164,7 +195,14 @@ endfunction
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 au BufRead,BufNewFile *.json set filetype=json
 
+if exists("+pyxversion")
+    set pyxversion=3
+endif
+
 " plugin settings
+let g:deoplete#enable_at_startup = 1
+" <TAB>: completion for deoplete
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 let g:CommandTMaxHeight=20
 let g:CommandTFileScanner='git'
 let g:CommandTRecursiveMatch=0
@@ -195,30 +233,8 @@ let g:go_highlight_variable_assignments = 1
 autocmd FileType go setlocal tabstop=2|setlocal shiftwidth=2|setlocal softtabstop=2|setlocal noexpandtab
 autocmd FileType go compiler go
 autocmd FileType go nmap <leader>gd :GoDef<CR>
-autocmd FileType typescript,typescript.tsx nmap <leader>gd :TsuDefinition<CR>
-autocmd FileType typescript,typescript.tsx nmap <leader>gr :TsuReferences<CR>
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" let g:ycm_autoclose_preview_window_after_insertion = 1
-" let g:ycm_add_preview_to_completeopt = 0
-" let g:ycm_register_as_syntastic_checker = 0
-" let g:ycm_max_num_candidates = 5
-" let g:ycm_max_num_identifier_candidates = 5
-" let g:ycm_complete_in_strings = 0
-" let g:ycm_semantic_triggers =  {
-"             \   'c' : ['->', '.'],
-"             \   'objc' : ['->', '.'],
-"             \   'ocaml' : ['.', '#'],
-"             \   'cpp,objcpp' : ['->', '.', '::'],
-"             \   'perl' : ['->'],
-"             \   'php' : ['->', '::', '"', "'", 'use ', 'namespace ', '\'],
-"             \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
-"             \   'html': ['<', '"', '</', ' '],
-"             \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
-"             \   'ruby' : ['.', '::'],
-"             \   'lua' : ['.', ':'],
-"             \   'erlang' : [':'],
-"             \   'haskell' : ['.', 're!.']
-"             \ }
+autocmd FileType typescript,typescript.tsx,typescriptreact nmap <leader>gd :TsuDefinition<CR>
+autocmd FileType typescript,typescript.tsx,typescriptreact nmap <leader>gr :TsuReferences<CR>
 set completeopt=longest,menuone
 set completeopt-=preview
 let g:JSHintUpdateWriteOnly=1
@@ -234,6 +250,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_exec = 'eslint'
 let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
+let g:syntastic_typescriptreact_checkers = ['tsuquyomi'] " You shouldn't use 'tsc' checker.
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_go_checkers = ['golint', 'govet']
@@ -246,10 +263,13 @@ let g:syntastic_html_tidy_ignore_errors = [ 'trimming empty' ]
 let g:github_user = 'oliversong'
 let g:github_comment_open_browser = 1
 let g:loaded_AlignMapsPlugin = 1 " short circuit alignmaps which screws up leader t
-" prettier autosave
-let g:prettier#autoformat = 0
 let g:snipMate = { 'snippet_version' : 1 }
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.graphql,*.md Prettier
+" prettier autosave
+" let g:prettier#autoformat = 0
+" let g:prettier#config#config_precedence = 'file-override'
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.graphql,*.md Prettier
+let g:neoformat_try_node_exe = 1
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.graphql,*.md Neoformat
 
 augroup vimrc_autocmd
   autocmd!
@@ -268,7 +288,12 @@ vmap <C-v> <Plug>(expand_region_shrink)
 
 set nocursorline " don't highlight current line
 set t_Co=256
-colorscheme solarized
+
+if has('nvim')
+  colorscheme NeoSolarized
+else
+  colorscheme solarized
+endif
 set cursorline
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
@@ -305,6 +330,16 @@ if exists('$TMUX')
 else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" Neovide fix command key
+if has('nvim')
+  " Allow copy paste in neovim
+  let g:neovide_input_use_logo = 1
+  map <D-v> "+p<CR>
+  map! <D-v> <C-R>+
+  tmap <D-v> <C-R>+
+  vmap <D-c> "+y<CR>
 endif
 
 " Go crazy!
