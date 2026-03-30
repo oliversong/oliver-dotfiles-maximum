@@ -3,14 +3,14 @@ if has('python3')
 endif
 
 call plug#begin('~/.vim/bundle')
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" if has('nvim')
+"   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" else
+"   Plug 'Shougo/deoplete.nvim'
+"   Plug 'roxma/nvim-yarp'
+"   Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-commentary'
@@ -24,6 +24,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'bkad/CamelCaseMotion'
 Plug 'tpope/vim-endwise' " endwise must come after delimitMate
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'jdhao/better-escape.vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'tomasr/molokai'
 Plug 'hdima/python-syntax'
@@ -62,14 +63,13 @@ Plug 'FooSoft/vim-argwrap'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
-" Plug 'prettier/vim-prettier'
+"Plug 'prettier/vim-prettier'
 Plug 'sbdchd/neoformat'
 Plug 'jparise/vim-graphql'
-Plug 'zhou13/vim-easyescape'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'TovarishFin/vim-solidity'
 Plug 'pantharshit00/vim-prisma'
-Plug 'github/copilot.vim'
+"Plug 'github/copilot.vim'
 if has('nvim')
   " Installs and builds vimproc (required to launch tsserver)
   Plug 'Shougo/vimproc.vim', {'do': 'make'}
@@ -200,12 +200,13 @@ if exists("+pyxversion")
 endif
 
 " plugin settings
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 " <TAB>: completion for deoplete
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 let g:CommandTMaxHeight=20
 let g:CommandTFileScanner='git'
 let g:CommandTRecursiveMatch=0
+let g:CommandTPreferredImplementation='lua'
 let g:NERDSpaceDelims=1
 let g:gitgutter_enabled = 1
 let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -319,9 +320,8 @@ let g:airline_skip_empty_sections = 1
 "set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 
 " keyboard shortcuts
-let g:easyescape_chars = { "j": 2 }
-let g:easyescape_timeout = 2000
-cnoremap jj <ESC>
+let g:better_escape_shortcut = 'jj'
+let g:better_escape_interval = 1000
 
 " Fix Cursor in TMUX
 if exists('$TMUX')

@@ -1,3 +1,5 @@
+let g:python3_host_prog='/opt/homebrew/bin/python3'
+let g:python_host_prog='/opt/homebrew/bin/python3'
 let NERDTreeIgnore = ['\.pyc$']
 " let g:prettier#exec_cmd_path = "/Users/oliversong/Development/atheva/marketplace/node_modules/.bin/prettier"
 let g:typescript_compiler_binary = "/Users/oliversong/Development/atheva/marketplace/node_modules/.bin/tsc"
